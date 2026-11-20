@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Pieniä työkaluja, jotka tekevät yhden asian hyvin. Juntsan tekemät sovellukset yhdessä paikassa.">
+<title>Juntsan kauppa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+  :root{
+    color-scheme:light;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  body{margin:0;font:14px system-ui,sans-serif}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+<style>
+:root{
+  --paperi:#f3eee4;
+  --paperi-2:#fbf8f2;
+  --muste:#17160f;
+  --muste-2:#4a4639;
+  --viiva:#d8d0bf;
+  --vihrea:#2f6f5e;
+  --vihrea-2:#235447;
+  --okra:#b5731c;
+  --varjo:0 1px 0 rgba(23,22,15,.04), 0 6px 18px -12px rgba(23,22,15,.5);
+  --otsikko:"Space Grotesk",system-ui,sans-serif;
+  --teksti:"Inter",system-ui,sans-serif;
+  --kone:"JetBrains Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paperi:#14130f;
+    --paperi-2:#1d1b16;
+    --muste:#efe9dc;
+    --muste-2:#a9a192;
+    --viiva:#332f26;
+    --vihrea:#6fbda8;
+    --vihrea-2:#8fd3c0;
+    --okra:#e0a052;
+    --varjo:0 1px 0 rgba(0,0,0,.4), 0 6px 18px -12px rgba(0,0,0,.9);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paperi:#14130f;
+  --paperi-2:#1d1b16;
+  --muste:#efe9dc;
+  --muste-2:#a9a192;
+  --viiva:#332f26;
+  --vihrea:#6fbda8;
+  --vihrea-2:#8fd3c0;
+  --okra:#e0a052;
+  --varjo:0 1px 0 rgba(0,0,0,.4), 0 6px 18px -12px rgba(0,0,0,.9);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--paperi);
+  color:var(--muste);
+  font-family:var(--teksti);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.rajaus{
+  max-width:60rem;
+  margin:0 auto;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* --- keskeneräisyyden merkki: tämä on runko, ei kauppa --- */
+.luonnos{
+  background:var(--okra);
+  color:#17160f;
+  font-family:var(--kone);
+  font-size:.72rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.luonnos .rajaus{padding-block:.55rem}
+
+/* --- ylätunniste --- */
+header{border-bottom:1px solid var(--viiva)}
+header .rajaus{padding-block:clamp(2.5rem,7vw,4.5rem)}
+.merkki{
+  font-family:var(--otsikko);
+  font-weight:700;
+  font-size:clamp(2.4rem,9vw,4rem);
+  letter-spacing:-.03em;
+  line-height:1;
+  margin:0;
+}
+.merkki span{color:var(--vihrea)}
+.lupaus{
+  font-size:clamp(1.05rem,2.6vw,1.3rem);
+  color:var(--muste-2);
+  max-width:34ch;
+  margin:1.1rem 0 0;
+  text-wrap:balance;
+}
+
+/* --- johdanto --- */
+.johdanto .rajaus{padding-block:clamp(2rem,5vw,3rem)}
+.johdanto p{max-width:62ch;margin:0 0 1rem}
+.johdanto p:last-child{margin-bottom:0}
+
+/* --- osastot --- */
+section.osasto .rajaus{padding-block:clamp(1.5rem,4vw,2.5rem)}
+.osaston-otsikko{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:.3rem 1rem;
+  border-top:2px solid var(--muste);
+  padding-top:.7rem;
+  margin-bottom:1.5rem;
+}
+.osaston-otsikko h2{
+  font-family:var(--otsikko);
+  font-size:1.4rem;
+  letter-spacing:-.01em;
+  margin:0;
+}
+.osaston-otsikko .kenelle{
+  font-size:.9rem;
+  color:var(--muste-2);
+}
+
+/* --- tuotekortit --- */
+.hylly{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(16rem,1fr));
+  gap:1rem;
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+.tuote{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  background:var(--paperi-2);
+  border:1px solid var(--viiva);
+  border-radius:12px;
+  padding:1.1rem 1.1rem 1rem;
+  box-shadow:var(--varjo);
+}
+.tuote h3{
+  font-family:var(--otsikko);
+  font-size:1.15rem;
+  margin:0 0 .35rem;
+  letter-spacing:-.01em;
+}
+.tuote .kuvaus{
+  margin:0 0 .9rem;
+  color:var(--muste-2);
+  font-size:.95rem;
+  flex:1;
+}
+.merkinnat{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.35rem;
+  margin:0 0 .9rem;
+  padding:0;
+  list-style:none;
+}
+.merkinnat li{
+  font-family:var(--kone);
+  font-size:.7rem;
+  letter-spacing:.04em;
+  color:var(--muste-2);
+  border:1px solid var(--viiva);
+  border-radius:999px;
+  padding:.15rem .55rem;
+  white-space:nowrap;
+}
+.rivi{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.75rem;
+  border-top:1px solid var(--viiva);
+  padding-top:.8rem;
+}
+.hinta{
+  font-family:var(--kone);
+  font-size:1rem;
+  color:var(--muste);
+}
+.hinta.auki{color:var(--muste-2)}
+.nappi{
+  font-family:var(--teksti);
+  font-weight:600;
+  font-size:.9rem;
+  background:var(--vihrea);
+  color:var(--paperi-2);
+  border:0;
+  border-radius:999px;
+  padding:.5rem 1.05rem;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.nappi:hover{background:var(--vihrea-2)}
+:root[data-theme="dark"] .nappi,
+:root:not([data-theme="light"]) .nappi{color:#14130f}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]) .nappi{color:var(--paperi-2)}
+}
+
+/* --- Mansikkakylä: pääsy, ei lataus --- */
+.tuote.paasy{
+  background:transparent;
+  border-style:dashed;
+  border-color:var(--vihrea);
+}
+.tuote.paasy .nappi{
+  background:transparent;
+  color:var(--vihrea);
+  border:1.5px solid var(--vihrea);
+  text-decoration:none;
+  display:inline-block;
+}
+.tuote.paasy .nappi:hover{background:transparent;text-decoration:underline}
+
+/* --- tulossa --- */
+.tuote.tulossa{opacity:.62}
+.tuote.tulossa .rivi{border-top-color:transparent}
+
+/* --- alatunniste --- */
+footer{border-top:1px solid var(--viiva);margin-top:2rem}
+footer .rajaus{padding-block:2.5rem}
+footer p{color:var(--muste-2);font-size:.9rem;max-width:62ch;margin:0 0 .7rem}
+footer p:last-child{margin-bottom:0}
+footer strong{color:var(--muste)}
+</style>
+</head>
+<body>
+<div class="luonnos"><div class="rajaus">Runko — hinnat ja tuotetekstit ovat paikanvaraajia</div></div>
+
+<header>
+  <div class="rajaus">
+    <h1 class="merkki">Juntsa<span>.fi</span></h1>
+    <p class="lupaus">Pieniä työkaluja, jotka tekevät yhden asian hyvin.</p>
+  </div>
+</header>
+
+<div class="johdanto">
+  <div class="rajaus">
+    <p>Jokainen täällä oleva työkalu on yksi tiedosto. Se avautuu selaimessa, toimii ilman asennusta ja ilman tiliä, eikä lähetä mitään mihinkään. Kun olet ostanut sen, se on sinun koneellasi — ei pilvessä, josta se voi kadota.</p>
+    <p>Olen tehnyt nämä omaan käyttööni ja omalla ajallani. Ne ovat täällä siksi, että joku muukin voi tarvita samaa.</p>
+  </div>
+</div>
+
+<section class="osasto">
+  <div class="rajaus">
+    <div class="osaston-otsikko">
+      <h2>Musiikintekijälle</h2>
+      <span class="kenelle">biisin ja videon väliin</span>
+    </div>
+    <ul class="hylly">
+      <li class="tuote">
+        <h3>Säe</h3>
+        <p class="kuvaus">Lyriikkavideo biisistä: sanat ajoitettuna kuvaan, 9:16 ja 16:16. Tehty Sunon SRT-vientiä varten.</p>
+        <ul class="merkinnat"><li>HTML</li><li>selain</li><li>9:16</li></ul>
+        <div class="rivi"><span class="hinta auki">— €</span><button class="nappi" type="button">Lisää koriin</button></div>
+      </li>
+      <li class="tuote">
+        <h3>Äänileikkuri</h3>
+        <p class="kuvaus">Oikean kohdan irrotus biisistä videota varten. Kuuntelet, merkitset alun ja lopun, saat pätkän.</p>
+        <ul class="merkinnat"><li>HTML</li><li>selain</li></ul>
+        <div class="rivi"><span class="hinta auki">— €</span><button class="nappi" type="button">Lisää koriin</button></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="osasto">
+  <div class="rajaus">
+    <div class="osaston-otsikko">
+      <h2>Arkeen</h2>
+      <span class="kenelle">puhelimessa, ilman tiliä</span>
+    </div>
+    <ul class="hylly">
+      <li class="tuote">
+        <h3>Ajokello</h3>
+        <p class="kuvaus">Ajopäiväkirja ilman kirjoittamista: osoite ja kello tallentuvat lähdössä ja perillä. Välipysähdykselle oma nappi.</p>
+        <ul class="merkinnat"><li>puhelin</li><li>sijainti</li></ul>
+        <div class="rivi"><span class="hinta auki">— €</span><button class="nappi" type="button">Lisää koriin</button></div>
+      </li>
+      <li class="tuote">
+        <h3>Treenikello</h3>
+        <p class="kuvaus">Treeni- ja ruokapäiväkirja samassa: sarjat, toistot ja kilot, ravintoarvot Finelistä.</p>
+        <ul class="merkinnat"><li>puhelin</li><li>Fineli</li></ul>
+        <div class="rivi"><span class="hinta auki">— €</span><button class="nappi" type="button">Lisää koriin</button></div>
+      </li>
+      <li class="tuote">
+        <h3>Kuvakello</h3>
+        <p class="kuvaus">Kello ja sää oman kuvan päällä. Vaihtuva tausta, iso näyttö — pöydälle tai jääkaapin oveen.</p>
+        <ul class="merkinnat"><li>puhelin</li><li>sää</li></ul>
+        <div class="rivi"><span class="hinta auki">— €</span><button class="nappi" type="button">Lisää koriin</button></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="osasto">
+  <div class="rajaus">
+    <div class="osaston-otsikko">
+      <h2>Kirjantekijälle</h2>
+      <span class="kenelle">käsikirjoituksesta aukeamiksi</span>
+    </div>
+    <ul class="hylly">
+      <li class="tuote">
+        <h3>Kirjapurku</h3>
+        <p class="kuvaus">Jakaa valmiin tarinan aukeamiksi: kuva vasemmalle, teksti oikealle. Näet heti mihin teksti ei mahdu.</p>
+        <ul class="merkinnat"><li>HTML</li><li>selain</li></ul>
+        <div class="rivi"><span class="hinta auki">— €</span><button class="nappi" type="button">Lisää koriin</button></div>
+      </li>
+      <li class="tuote">
+        <h3>Puheharjoittelu</h3>
+        <p class="kuvaus">Englannin ääneen puhumisen harjoittelu omaan tahtiin. <em>Nimi vielä auki.</em></p>
+        <ul class="merkinnat"><li>HTML</li><li>selain</li><li>mikrofoni</li></ul>
+        <div class="rivi"><span class="hinta auki">— €</span><button class="nappi" type="button">Lisää koriin</button></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="osasto">
+  <div class="rajaus">
+    <div class="osaston-otsikko">
+      <h2>Lapsille</h2>
+      <span class="kenelle">kodit, päiväkodit, hoivapuoli</span>
+    </div>
+    <ul class="hylly">
+      <li class="tuote paasy">
+        <h3>Mansikkakylä</h3>
+        <p class="kuvaus">Satukirjat, laulut, videot ja pelit omalla sivustollaan. Tämä ei ole ladattava tiedosto vaan käyttöoikeus — kuukausi tai vuosi kerrallaan.</p>
+        <ul class="merkinnat"><li>sivusto</li><li>fi · en · es</li><li>tilaus</li></ul>
+        <div class="rivi"><span class="hinta auki">— € / kk</span><a class="nappi" href="https://mansikkakyla.fi">mansikkakyla.fi →</a></div>
+      </li>
+      <li class="tuote tulossa">
+        <h3>Selkopelit</h3>
+        <p class="kuvaus">Yksinkertaisia pelejä, joissa on yksi sääntö ja iso nappi. Suunnattu myös kehitysvammaisille pelaajille.</p>
+        <ul class="merkinnat"><li>tulossa</li></ul>
+        <div class="rivi"><span class="hinta auki">Tulossa</span></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="osasto">
+  <div class="rajaus">
+    <div class="osaston-otsikko">
+      <h2>Ammattikäyttöön</h2>
+      <span class="kenelle">kiinteistöala</span>
+    </div>
+    <ul class="hylly">
+      <li class="tuote tulossa">
+        <h3>Laskurit</h3>
+        <p class="kuvaus">Kiinteistönhoidon ja ulkoalueiden mitoitus- ja hinnoittelulaskureita yleispätevinä, itse säädettävinä versioina.</p>
+        <ul class="merkinnat"><li>tulossa</li></ul>
+        <div class="rivi"><span class="hinta auki">Tulossa</span></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="rajaus">
+    <p><strong>Tämä on runko.</strong> Rakenne, osastojako ja ilme ovat päätettäviä asioita; tuotetekstit ja hinnat ovat paikanvaraajia, jotka kirjoitat itse. Jokainen kuvaus on tässä yhden lauseen mittainen tarkoituksella — se on se mitä ostaja ehtii lukea.</p>
+    <p>Kolme asiaa on vielä auki: myydäänkö lataus vai lisenssi, mikä on kassa, ja mikä on puheharjoittelutyökalun julkinen nimi.</p>
+  </div>
+</footer>
+</body>
+</html>
